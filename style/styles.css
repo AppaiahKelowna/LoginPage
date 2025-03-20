@@ -1,0 +1,17 @@
+body {
+	display: flex; 
+	justify-content: center; 	/* Div is centered Horizontal  */
+	align-items: center; 		/* Div is centered vertically*/
+	height: 100vh; 			/* Ensure the body takes full height of the viewport */
+	background: url("../images/bluebackgroundimg.jpg") no-repeat center center/cover;
+}
+.logincontainer {
+	display: flex;
+ 	flex-direction: column; 	/* vertically arrange element*/
+	width: 50%; 			/* 50% width of parent */
+	max-width: 400px;
+	gap: 10px; 			/* 10px space between items*/
+	background: rgba(255, 255, 255, 0.9);
+    	padding: 20px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
