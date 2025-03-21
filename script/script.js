@@ -1,29 +1,28 @@
 $(document).ready(function() {
-	$("#username").on("blur",function() {
-		const userName = $("#username").val();
-		const loginButton = $("#loginbutton");
-		const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const loginButton = $("#loginbutton");
 
-		if(emailPattern.test(userName)) {
-			$("#loginbutton").prop("disabled", false);
-		} else {
-			$("#loginbutton").prop("disabled", true);
-		}
-});	
-});
+    $("#username").on("blur", function() {
+        const userName = $(this).val();
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+        loginButton.prop("disabled", !emailPattern.test(userName));
+    });
 
-$(document).ready(function(){
-	$("#loginbutton").click(function(){
-	const userName = $("#username").val();
-	const password = $("#password").val();
-	
-	setTimeout(function(){
-		if(userName === "hr@auphansoftware.com" && password === "hello"){
-			alert("Login Successful");
-		} else {
-			alert("Incorrect Username/Password");
-		}
-}, 2000);
-});
+    $("#logincontainer").submit(function(event) {
+        event.preventDefault();
+
+        const userName = $("#username").val();
+        const password = $("#password").val();
+
+        $.ajax({
+            url: "http://localhost:8000/login.php",
+            type: "POST",
+            data: { username: userName, password: password },
+	    contentType: "application/x-www-form-urlencoded",
+            success: function(response) {
+                const res = typeof response === "string" ? JSON.parse(response) : response;
+   		 alert(res.message); 
+            }
+        });
+    });
 });
